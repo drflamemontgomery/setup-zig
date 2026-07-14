@@ -4,13 +4,21 @@ inputs:
     default: 'master'
     required: true
     type: string
+  os:
+    default: 'linux'
+    required: true
+    type: string
+  arch:
+    default: 'x86_64'
+    required: true
+    type: string
 
 runs:
   using: 'composite'
   steps:
     - name: Install Zig
       run: |
-        curl -L https://github.com/marler8997/zigup/releases/download/v2024_05_05/zigup-x86_64-linux.tar.gz | tar xz
+        curl -L https://github.com/marler8997/anyzig/releases/latest/download/anyzig-${{ inputs.arch }}-${{ inputs.os }}.zip | tar xz
         echo "Install"
         sudo install zigup /usr/bin
         sudo zigup ${{ inputs.version }} --install-dir /usr/bin/
